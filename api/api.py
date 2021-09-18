@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/prediction', methods=['GET', 'POST'])
 def predict():
-    if request.method == "POST" and request.json:
+    if request.method == "POST":
         try:
             formData = request.json
             trashCategory = model(formData['imagefield'])

@@ -23,7 +23,8 @@ class App extends Component {
     }
 
     handleChange = (event) => {
-        const value = URL.createObjectURL(event.target.files[0]);
+        // const value = URL.createObjectURL(event.target.files[0]);
+        const value = event.target.files[0];
         const name = event.target.name;
         var formData = this.state.formData;
         formData[name] = value;
