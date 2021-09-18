@@ -2,15 +2,6 @@ from flask import Flask, request, jsonify, make_response
 
 app = Flask(__name__)
 
-# OG one for testing, to delete if unused
-
-
-@app.route('/result', methods=['GET'])
-def index():
-    trashImage = ""
-    trashCategory = model(trashImage)
-    return {'prediction': trashCategory, 'points': calculatePoints(trashCategory)}
-
 
 @app.route('/prediction', methods=['GET', 'POST'])
 def predict():
@@ -21,14 +12,10 @@ def predict():
             response = jsonify({
                 "statusCode": 200,
                 "status": "Prediction made",
-                "result": "Prediction: " + trashCategory,  # CHANGE LATER
+                "result": "Prediction: " + trashCategory, 
                 "image": formData['imagefield']  # DELETE LATER
             })
 
-            #  DEBUGGING
-            # response = jsonify({
-            #     "result": "finally"
-            # })
             response.headers.add('Access-Control-Allow-Origin', '*')
             return response
         except Exception as error:
