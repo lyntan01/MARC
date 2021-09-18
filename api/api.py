@@ -16,19 +16,20 @@ def index():
 def predict():
     if request.method == "POST" and request.json:
         try:
-            # formData = request.json
-            # trashCategory = model(formData['imagefield'])
-            # response = jsonify({
-            #     "statusCode": 200,
-            #     "status": "Prediction made",
-            #     "result": "Prediction: " + trashCategory,  # CHANGE LATER
-            #     "image": formData['imagefield']  # DELETE LATER
-            # })
+            formData = request.json
+            trashCategory = model(formData['imagefield'])
+            response = jsonify({
+                "statusCode": 200,
+                "status": "Prediction made",
+                "result": "Prediction: " + trashCategory,  # CHANGE LATER
+                "image": formData['imagefield']  # DELETE LATER
+            })
 
             #  DEBUGGING
-            response = jsonify({
-                "result": "finally"
-            })
+            # response = jsonify({
+            #     "result": "finally"
+            # })
+            response.headers.add('Access-Control-Allow-Origin', '*')
             return response
         except Exception as error:
             return jsonify({
@@ -37,7 +38,16 @@ def predict():
                 "error": str(error)
             })
 
+    else:
+        response = make_response()
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add('Access-Control-Allow-Headers', "*")
+        response.headers.add('Access-Control-Allow-Methods', "*")
+        return response
+
 # Returns the prediction of the trash classfication model
+
+
 def model(trashImage):
     # Insert model here
     return "Prediction"

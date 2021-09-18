@@ -25,6 +25,7 @@ class App extends Component {
         const value = event.target.files[0];
         const name = event.target.name;
         var formData = this.state.formData;
+        formData[name] = value;
         this.setState({
             formData
         });
@@ -32,14 +33,14 @@ class App extends Component {
 
     handlePredictClick = (event) => {
         const formData = this.state.formData;
-        console.log(formData); // debugging
+        // console.log(formData); // debugging
         this.setState({ isLoading: true });
-        fetch('http://127.0.0.1:5000/prediction/',
+        fetch('/prediction',
             {
-                //   headers: {
-                //     'Accept': 'application/json',
-                //     'Content-Type': 'application/json'
-                //   },
+                  headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                  },
                 method: 'POST',
                 body: JSON.stringify(formData)
             })
@@ -89,11 +90,10 @@ class App extends Component {
                                 <Form.Label>Upload image of trash item</Form.Label>
                                 <Form.Control
                                     type="file"
-                                    class="form-control-file"
                                     name="imagefield"
                                     required
                                     accept="image/*"
-                                    value={formData.imagefield}
+                                    // value={formData.imagefield}
                                     onChange={this.handleChange} />
                             </Form.Group>
                         </Form.Row>
@@ -102,7 +102,7 @@ class App extends Component {
                             <Col>
                                 <Button
                                     block
-                                    type="submit"
+                                    // type="submit"
                                     variant="success"
                                     disabled={isLoading}
                                     onClick={!isLoading ? this.handlePredictClick : null}>
