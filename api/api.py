@@ -9,10 +9,16 @@ def predict():
         try:
             formData = request.json
             trashCategory = model(formData['imagefield'])
+            if trashCategory != "Trash":
+                message = "This belongs to the " + trashCategory + " recycling bin!"
+            else:
+                message = "This item cannot be recycled. Please dispose of this in the nearest wastebin."
+
             response = jsonify({
                 "statusCode": 200,
                 "status": "Prediction made",
-                "result": "Prediction: " + trashCategory, 
+                "result": message, 
+                "points": "You have earned " + str(calculatePoints(trashCategory)) + " points",
                 "image": formData['imagefield']  # DELETE LATER
             })
 
@@ -33,15 +39,15 @@ def predict():
         return response
 
 # Returns the prediction of the trash classfication model
-
-
 def model(trashImage):
     # Insert model here
-    return "Prediction"
+    return "Paper"
 
 # Returns the number of points user earns for a trash item
 
 
 def calculatePoints(trashCategory):
-    # Insert logic here
+    # Insert logic here, sample logic below
+    if trashCategory == "Trash":
+        return 0
     return 5

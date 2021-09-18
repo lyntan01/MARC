@@ -17,12 +17,13 @@ class App extends Component {
             formData: {
                 imagefield: null,
             },
-            result: ""
+            result: "",
+            points: 0
         };
     }
 
     handleChange = (event) => {
-        const value = event.target.files[0];
+        const value = URL.createObjectURL(event.target.files[0]);
         const name = event.target.name;
         var formData = this.state.formData;
         formData[name] = value;
@@ -33,7 +34,7 @@ class App extends Component {
 
     handlePredictClick = (event) => {
         const formData = this.state.formData;
-        // console.log(formData); // debugging
+        console.log(formData); // debugging
         this.setState({ isLoading: true });
         fetch('/prediction',
             {
@@ -48,6 +49,7 @@ class App extends Component {
             .then(response => {
                 this.setState({
                     result: response.result,
+                    points: response.points,
                     isLoading: false
                 });
                 console.log(response);
@@ -58,25 +60,11 @@ class App extends Component {
         this.setState({ result: "" });
     }
 
-    handleSubmit = (e) => {
-        e.preventDefault()
-        const formData = new FormData(e.target);
-
-        const Upload = async () => {
-            await fetch('/prediction', {
-                method: 'POST',
-                body: formData
-            }).then(resp => {
-                resp.json().then(data => { console.log(data) })
-            })
-        }
-        Upload();
-    }
-
     render() {
         const isLoading = this.state.isLoading;
         const formData = this.state.formData;
         const result = this.state.result;
+        const points = this.state.points;
 
         return (
             <Container>
@@ -124,6 +112,7 @@ class App extends Component {
                         (<Row>
                             <Col className="result-container">
                                 <h5 id="result">{result}</h5>
+                                <h5 id="points">{points}</h5>
                             </Col>
                         </Row>)
                     }

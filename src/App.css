@@ -39,7 +39,7 @@ label {
   padding: 20px 0 0;
 }
 
-#result {
+#result, #points {
   color: #000;
 }
 
