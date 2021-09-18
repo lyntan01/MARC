@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
+
+  const [trashCategory, setTrashCategory] = useState("");
+  const [points, setPoints] = useState(0);
+
+  useEffect(() => {
+    fetch('/home').then(response => response.json()).then(data => {
+      setTrashCategory(data.prediction);
+      setPoints(data.points);
+    });
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>You have thrown an item that is {trashCategory}.</h2>
+      <h3>You have earned {points} points.</h3>
     </div>
   );
 }
