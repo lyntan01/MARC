@@ -1,3 +1,50 @@
+html, body {
+  background: url('https://img.blogs.es/smartcitylab/wp-content/uploads/2019/12/Singapur.jpg') center center no-repeat;
+  background-size: cover;
+  color: rgb(0, 0, 0);
+  height: 100%;
+  width: 100%;
+}
+
+.content {
+  margin: auto;
+  margin-top: 20px;
+  width: 70%;
+  height: auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.title {
+  padding-top: 100px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 3.3em;
+  letter-spacing: 0.15rem;
+  color: rgb(255, 255, 255);
+  text-shadow: 2px 2px 4px #000000;
+}
+
+label {
+  color: #333;
+}
+
+.result-container {
+  text-align: center;
+  font-weight: 600;
+  font-size: 4em;
+  letter-spacing: 0.15rem;
+  padding: 20px 0 0;
+}
+
+#result {
+  color: #000;
+}
+
+/* 
+
 .App {
   text-align: center;
 }
@@ -35,4 +82,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */

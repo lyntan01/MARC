@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
 
@@ -7,7 +13,7 @@ function App() {
   const [points, setPoints] = useState(0);
 
   useEffect(() => {
-    fetch('/home').then(response => response.json()).then(data => {
+    fetch('/result').then(response => response.json()).then(data => {
       setTrashCategory(data.prediction);
       setPoints(data.points);
     });
